@@ -19,7 +19,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------------
   influxdb:
     image: influxdb:2.7
     container_name: influxdb
@@ -32,7 +32,6 @@ services:
       - DOCKER_INFLUXDB_INIT_ORG=uaemex
       - DOCKER_INFLUXDB_INIT_BUCKET=kafka_data
 
-  # PASO 2: Añadir Grafana
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -41,14 +40,3 @@ services:
     depends_on:
       - influxdb
 
-#Esta parte de kafdrop puede ser omitida dado que solo es una web UI para monitorear kafka
-  # kafdrop:
-  #   image: obsidiandynamics/kafdrop:latest
-  #   restart: always
-  #   ports:
-  #     - "9001:9000"
-  #   environment:
-  #     KAFKA_BROKERCONNECT: kafka:29092  # Changed from kafka:9092 to kafka:29092
-  #     JVM_OPTS: "-Xms32M -Xmx64M"
-  #   depends_on:
-  #     - kafka
