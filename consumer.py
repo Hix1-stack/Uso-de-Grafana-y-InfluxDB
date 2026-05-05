@@ -5,8 +5,8 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 import time
 
 # --- CONFIGURACIÓN DE INFLUXDB ---
-# Pega aquí el token largo que copiaste de la interfaz de InfluxDB
-TOKEN = "jxPDYKY1KIoeZB8IALZPOyxoQU9c6UoIpyPo4O2H55VsSCYjO0cAoIyP7RPjps-i64R57T7S2Y36GhYZ4LVw5g==" 
+# Pega aquí el token de InfluxDB
+TOKEN = "-Token-" 
 ORG = "uaemex"
 BUCKET = "kafka_data"
 URL = "http://localhost:8086"
@@ -18,7 +18,7 @@ write_api = client.write_api(write_options=SYNCHRONOUS)
 def create_consumer():
     """Create a connection to Kafka broker as a consumer"""
     consumer = KafkaConsumer(
-        'orders', # Asegúrate que tu producer.py también use el tópico 'orders'
+        'orders', 
         bootstrap_servers=['localhost:9092'],
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         group_id='order-processing-group',
