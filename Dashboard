@@ -1,0 +1,5 @@
+from(bucket: "kafka_data")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r._measurement == "procesamiento_ordenes")
+  |> filter(fn: (r) => r._field == "cantidad")
+  |> aggregateWindow(every: v.windowPeriod, fn: sum, createEmpty: false)
